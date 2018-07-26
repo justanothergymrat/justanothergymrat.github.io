@@ -4,78 +4,312 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <center>  
-    <title></title>
+    <title>Evolution of a YummyDataMap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
 </head>
 <body>
-    <a href="/project_1">Project #1</a>
+    <a href="https://github.com/MadeleineC/TheYummyDataProject">Project #1</a><br/>
+    <a href="https://desolate-coast-92913.herokuapp.com/">Project #2</a><br/>
+    <a href="https://boiling-tor-38063.herokuapp.com/">Project #3</a><br/>
     <hr width = 200>
-        <table>
-    
-                <tr><th>key</th><th>+option</th></tr>
-                <tr><td>a</td><td>å</td></tr>
-                <tr><td>b</td><td>∫</td></tr>
-                <tr><td>c</td><td>ç</td></tr>
-                <tr><td>d</td><td>∂</td></tr>
-                <tr><td>e</td><td>´</td></tr>
-                <tr><td>f</td><td>ƒ</td></tr>
-                <tr><td>g</td><td>©</td></tr>
-                <tr><td>h</td><td>˙</td></tr>
-                <tr><td>i</td><td>ˆ</td></tr>
-                <tr><td>j</td><td>∆</td></tr>
-                <tr><td>k</td><td>˚</td></tr>
-                <tr><td>l</td><td>¬</td></tr>
-                <tr><td>m</td><td>µ</td></tr>
-                <tr><td>n</td><td>˜</td></tr>
-                <tr><td>o</td><td>ø</td></tr>
-                <tr><td>p</td><td>π</td></tr>
-                <tr><td>q</td><td>œ</td></tr>
-                <tr><td>r</td><td>®</td></tr>
-                <tr><td>s</td><td>ß</td></tr>
-                <tr><td>t</td><td>†</td></tr>
-                <tr><td>u</td><td>¨</td></tr>
-                <tr><td>v</td><td>√</td></tr>
-                <tr><td>w</td><td>∑</td></tr>
-                <tr><td>x</td><td>≈</td></tr>
-                <tr><td>y</td><td>¥</td></tr>
-                <tr><td>1</td><td>¡</td></tr>
-                <tr><td>2</td><td>™</td></tr>
-                <tr><td>3</td><td>£</td></tr>
-                <tr><td>4</td><td>¢</td></tr>
-                <tr><td>5</td><td>∞</td></tr>
-                <tr><td>6</td><td>§</td></tr>
-                <tr><td>7</td><td>¶</td></tr>
-                <tr><td>8</td><td>•</td></tr>
-                <tr><td>9</td><td>ª</td></tr>
-                <tr><td>0</td><td>º</td></tr>
-                <tr><td>-</td><td>–</td></tr>
-                <tr><td>=</td><td>≠</td></tr>
-                <tr><td>!</td><td>⁄</td></tr>
-                <tr><td>@</td><td>€</td></tr>
-                <tr><td>#</td><td>‹</td></tr>
-                <tr><td>$</td><td>›</td></tr>
-                <tr><td>%</td><td>ﬁ</td></tr>
-                <tr><td>^</td><td>ﬂ</td></tr>
-                <tr><td>&</td><td>‡</td></tr>
-                <tr><td>*</td><td>°</td></tr>
-                <tr><td>(</td><td>·</td></tr>
-                <tr><td>)</td><td>‚</td></tr>
-                <tr><td>_</td><td>—</td></tr>
-                <tr><td>+</td><td>±</td></tr>
-                <tr><td>,</td><td>≤</td></tr>
-                <tr><td>.</td><td>≥</td></tr>
-                <tr><td>/</td><td>÷</td></tr>
-                <tr><td>></td><td>¯</td></tr>
-                <tr><td>></td><td>˘</td></tr>
-                <tr><td>?</td><td>¿</td></tr>
+       <h2>Evolution of a YummyDataMap</h2>
+    </center>
+    <hr width = 150>
 
+    <p>
+        Upon initial brainstorming of what to work on for a project, our group was pulled into multiple directions:
+        <br/>
+        <ul>
+            <li>What if we made a yelp review scraper and performed sentiment analysis to determine the “most liked” restaurants?</li>
+            <br/>
+            <li>What if we utilized Zillow’s API to visualize gentrification?</li>
+            <br/>
+           <li> What if we tried to quantify & visualize the effect that citywide festivals & events (like SXSW & ACL) have on housing prices?</li>
+           <br/>
+        </ul>	
+    
+        After a little recon on the subjects we still couldn’t come to a consensus. We did agree on a couple motifs however:
+
+        <ul>
+            <li>
+                It had to be dynamic
+                <ul>
+                    <li>
+                        It had to work for any city, not just Austin
+                    </li>
+                    <li>
+                        It had to be on-demand
+                    </li>
+                    <li>
+                        We didn’t want to pigeonhole ourselves by basing our work off of 1 spreadsheet downloaded off the internet that contains data which only this 1 county in this 1 city keeps
+                    </li>
+                </ul>
+            </li>
+            <br/>
+            <li>
+                It had to be repeatable
+                <ul>
+                    <li>
+                        It had to have some degree of reliability
+                    </li>
+                    <li>
+                        Our pipeline couldn’t break when confronted with outliers or invalid entries
+                    </li>
+                    <li>
+                        We needed something we were confident wouldn’t break with ‘unique’ items (ie input with hyphens [ Winston-Salem ] or input that actually isn’t a city [ Martha’s Vineyard ] )
+                    </li>
+                </ul>
+            </li>
+            <br/>
+            <li>
+                It had to be targeted
+                <ul>
+                    <li>
+                        It had to have some degree of precision
+                    </li>
+                    <li>
+                        It needed to be broad enough that it wasn’t a niche (ie limiting our dataset)
+                    </li>
+                    <li>
+                        But also specific enough that we could glean meaningful, relevant, actionable insights 
+                    </li>
+                </ul>
+            </li>
+            <br/>
+            <li>
+                It had to provide value
+                <ul>
+                    <li>
+                        Would a client/employer pay for this service/information?
+                    </li>
+                </ul>
+            </li>
+            <br/>
+        </ul>
+        Thus a compromise was suggested: What if we made something that told us where entrepreneurs or restaurant chains should open a new restaurant?
+        <br/><br/>
+        Simple enough....
+        <br/><br/>
+
+        <hr width = 75%>
+        <h4>Yummy data app v1</h4>
+        <br/>
+        So we refined it further: give us the city, state, and cuisine type and we’ll suggest a neighborhood that best suits opening your restaurant.
+        <br/><br/>
+        After whittling down our sources for data we were left with the following:
+        <br/>
+        <ul>
+            <li>
+                Sketchy internet API for zipcodes
+            </li>
+            <br/>
+            <li>
+                Google Places API
+            </li>
+            <br/>
+        </ul>
+
+        We tried Zillow – they didn’t give us the information we needed. We tried Yelp – they limited the number of results an API call would return.
+        <br/><br/>
+        We also tried breaking down the city into informal ‘neighborhood’ names (ie Tarrytown, Barton Springs, etc) but this turned out to be a bad idea. It was difficult enough finding a source of this data for just Austin, it would have been a nightmarish task attempting to make this dynamic as well. So we decided on zipcodes.
+        <br/><br/>
+        In order to visualize the data we decided on the following:
+        <ul>
+            <li>
+                Heatmap plot
+            </li>
+            <br/>
+            <li>
+                Swarmplot
+            </li>
+            <br/>
+            <li>
+                An actual map
+            </li>
+            <br/>
+        </ul>
+        The logic was that this is all investigative information to begin with – a client would take this information and then drill down further. We couldn’t (at the time) suggest a client open their restaurant at 6th & Brazos specifically, only the zipcode(s) that seemed to be the best fit. 
+        <br/><br/>
+        We wanted to lead with a couple ‘glancing’ blows before the debilitating shot. Both the heatmap & swarmplot have the potential to tell a story at a glance while the map is a more detailed depiction, and a better tool to utilize for further investigation (or answering the question of ‘where, secifically?’).
+        <br/><br/>
+        This was also our first encounter with ‘scope creep’ – our biggest issue. 
+        <br/><br/>
+        We quickly realized that we bit off more than we could chew and had to hone our focus. The final product, while not the prettiest, was a functioning ‘app’ (rather, a Jupyter Notebook) that did nearly exactly what we had envisioned.
+        <br/><br/>
+        <a href="https://github.com/MadeleineC/TheYummyDataProject">First Iteration of YummyDataMap</a>
+        <br/><br/>
+        But we weren’t satisfied with a couple of things:
+        <br/>
+        <ul>
+            <li>
+                It wasn't accurate enough
+            </li>
+            <li>
+                It wasn't concise enough
+            </li>
+            <li>
+                It wasn't fast enough
+            </li>
+            <li>
+                It wasn't hosted online
+            </li>
+        </ul>
+        <br/>
+        <hr width = 75%>
+        <h4>Yummy data app v2</h4>
+        <br/>
+
+        Not completely satisfied with our initial project, we opted to make some ‘drastic’ changes (upgrades):
+        <br/><br/>
+        <ol>
+            <li>
+                Consolidate visuals all into 1 map
+            </li>
+            <li>
+                Increase accuracy of data sources
+            </li>
+            <li>
+                Draw zipcode boundaries dynamically
+            </li>
+            <li>
+                Implement a database to store results
+            </li>
+            <li>
+                Host it online
+            </li>
+        </ol>
+        <br/>
+    To solve the accuracy issue we changed the source of our zipcodes to a Python module. 
+    <br/><br/>
+    Not only did this mean no more API calling to sketchy websites, the module came along with demographic information taken from a 2010 census report so we were able to visualize another layer of detail.
+    <br/><br/>
+    To solve the conciseness issue we visualized only 1 Leaflet map. 
+    <br/><br/>
+    Leaflet JS gave us the ability to customize multiple overlays and we found it easier to use than MapBox, which one of our previous maps utilized. So now instead of 3 different maps we had 1 map with demographic layers, zipcode boundaries drawn, dynamic clustering of results, and detailed markers.
+    <br/><br/>
+    To solve the speed issue we made 2 large changes on the backend: utilizing a database & taking advantage of Jinja.  
+    <br/><br/>
+    We created a SQLite database to store search results so if another user searched for the same user-input combination the map would bypass querying the API completely and load the page with the saved results. This also meant we could attach other pieces of data to each query result with relative ease & speed (for example, zipcode boundary lines). Instead of passing multiple JSON objects to the front end we took advantage of Jinja’s ability to parse objects and passed one big JSON object containing all the information our map would need to render.
+    <br/><br/>
+    To solve the hosting issue we loaded our map onto Heroku. 
+    <br/><br/>
+    Now anyone could go to our app whenever they wanted.
+    <br/><br/>
+    <a href="https://desolate-coast-92913.herokuapp.com/">Second Iteration of YummyDataMap</a>
+    <br/><br/>
+    Everything was great…
+    <br/><br/>
+    Except two glaring flaws:
+    <br/>
+    <ol>
+        <li>
+            Our initial data-flow sent one JSON object to render the map on page load. This meant every time a user searched the entire webpage refreshed. Amateur, and annoying, but it worked, right? Heroku says no…
+        </li>
+        <br/>
+        <li>
+            We went with Heroku for hosting because its free, its easy (relatively), and we had (limited) experience with it already. Blinded by the excitement of hosting a working app, we didn’t realize that free hosting came with a caveat: request will time-out if they take > ~30 seconds for the server to respond.
+        </li>
+    </ol>
+    <br/><br/>
+    Because some API queries to larger cities can take minutes to complete, we ran into multiple cases of ‘Server not responding’ being returned instead of our map being rendered. The back-end code would still run: API would be queried, results stored in database…but the map wouldn’t load because the front-end was killed by Heroku.
+    <br/><br/>
+    This version also focused more on visualization than analysis. So we had our work cut out for us.
+    <br/><br/>
+    <hr width = 75%>
+    <h4>Yummy data app v3</h4>
+    <br/>
+    We collectively felt that version 2 wasn’t as good as it could (and should) have been. So we pivoted again:
+    <br/>
+    <ul>
+        <li>
+            We needed to redesign the data-flow
+        </li>
+        <br/>
+        <li>
+            We needed to add some sort of automated analysis back in
+        </li>
+        <br/>
+        <li>
+            We needed to further hone accuracy
+        </li>
+    </ul>
+    So we made some fundamental changes this iteration:
+    <br/><br/>
+    <ul>
+        <li>
+        We sourced our demographic data from historical US Census reports, dating back to 2010. This enriched our dataset and gave us many other features we didn’t have before. 
+        </li>
+        <br/><br/>
+        <li>
+        We redesigned our data-flow and incorporated asynchronous tasks server-side with Celery & redis. Now the page wouldn’t have to reload upon every search, nor would it timeout.
+        </li>
+        <br/><br/>
+        <li>
+        We implemented machine learning to provide analysis. We trained our model with the historical Census data to predict the number of restaurants a selected zipcode can support in 2018.
+        </li>
+    </ul>
+    <br/><br/>
+    <a href="https://boiling-tor-38063.herokuapp.com/">Third Iteration of YummyDataMap</a>
+    <br/><br/>
+    Armed with this data a client will now have a bird’s eye visualization of the target area, demographic layers to suggest clientele, and a prediction algorithm to help suggest if the area is worth pursuing.
+    <br/><br/>
+    Of course with new changes came new issues. 
+    <br/><br/>
+    Apparently Heroku doesn't play well with SQLite. Since our database functioned properly on version 2, we had assumed that everything would be fine with version 3.
+    But the addition of Celery & redis borked writing to the database so no search results are saved & we our pie chart, which normally displays the breakdown of restaurants in the selected zipcode by price range, will not update.
+    <br/><br/>
+    To fix this in the next iteration we are going to 'upgrade' the database from SQLite to Postgres, which Heroku does support.
+    <br/><br/>
+    To be continued...
+    <br/><br/>
+    <hr width = 75%>
+<center>    
+<nav class = 'smallbox'>
+    <ul>
+        <li>
+            <a href="https://justanothergymrat.github.io/" class=''>Home</a>
+        </li>
+        <li>
+            <a href="https://github.com/justanothergymrat" class = '' >GitHub</a>
+        </li>
+        <li>
+            <a href="http://www.linkedin.com/in/marko-s" class = '' >LinkedIn </a>
+        </li>
+        <li>
+            <a href="https://public.tableau.com/profile/m8591#!/" class = ''>Tableau's </a>
+        </ul>
+</nav>
     
     
     
-    
-        </table>
-    
+        
+    </p>
+
 </body>
+<style>
+.rectangle{
+width:500px;
+height:100px;
+border:1px solid #000;
+fill: #f1f1f1
+}
+
+.smallbox li {
+    display: inline-block;
+    position: relative ;
+    width:50px;
+    height:10px;
+    border:1px solid #000;
+    fill: #f1f1f1;
+    background-color: #f1f1f1;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: None;
+}
+.smallbox li a{
+    text-decoration: none
+}
+</style>
 </html>
